@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  homeassistant:
+    image: homeassistant/home-assistant:latest
+    container_name: homeassistant
+    networks: 
+      - plexnet
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+    volumes:
+      - ${MOUNT_POINT}/homeassistant/config:/config
+    ports:
+      - 8123:8123 #optional
+    #devices:
+    #  - /path/to/device:/path/to/device #optional
+    restart: unless-stopped
